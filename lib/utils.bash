@@ -48,9 +48,8 @@ get_system_architecture() {
   local architecture
   architecture=$(uname -m)
   case $architecture in
-  armv*) architecture="ARM" ;;
-  aarch64) architecture="ARM64" ;;
-  x86_64) architecture="64bit" ;;
+  aarch64) architecture="arm64" ;;
+  x86_64) architecture="amd64" ;;
   esac
   echo "$architecture"
 }
