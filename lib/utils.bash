@@ -36,10 +36,10 @@ get_platform() {
   local platform
   platform=$(uname)
   case $platform in
-  darwin) platform="macOS" ;;
-  linux) platform="Linux" ;;
-  freebsd) platform="FreeBSD" ;;
-  windows) platform="Windows" ;;
+  Darwin) platform="darwin" ;;
+  Linux) platform="linux" ;;
+  FreeBSD) platform="freebsd" ;;
+  Windows) platform="windows" ;;
   esac
   echo "$platform"
 }
