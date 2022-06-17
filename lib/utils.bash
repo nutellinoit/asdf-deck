@@ -75,8 +75,6 @@ download_release() {
     fi
   fi
 
-
-
 }
 
 install_version() {
