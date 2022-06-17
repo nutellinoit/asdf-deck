@@ -70,11 +70,12 @@ download_release() {
 
   if [ $success -eq 0 ]; then
     curl "${curl_opts[@]}" -o "$filename" -C - "$alternative_url" || success=0
+    if [ $success -eq 0 ]; then
+      fail "Could not download $alternative_url"
+    fi
   fi
 
-  if [ $success -eq 0 ]; then
-    fail "Could not download $url"
-  fi
+
 
 }
 
