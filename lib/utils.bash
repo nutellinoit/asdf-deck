@@ -64,16 +64,22 @@ download_release() {
   alternative_url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_all.tar.gz"
 
   success=1
-  echo "* Downloading $TOOL_NAME release $version..."
-  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || success=0
-
-  if [ $success -eq 0 ]; then
-    success=1
+  # if platform is darwin
+  if [ "$platform" = "darwin" ]; then
+    echo "* Downloading $TOOL_NAME release $version..."
     curl "${curl_opts[@]}" -o "$filename" -C - "$alternative_url" || success=0
+
     if [ $success -eq 0 ]; then
-      fail "Could not download $alternative_url"
+      success=1
+      curl "${curl_opts[@]}" -o "$filename" -C - "$url" || success=0
+      if [ $success -eq 0 ]; then
+        fail "Could not download $alternative_url or $url"
+      fi
     fi
+  else
+    curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
   fi
+
 
 }
 
