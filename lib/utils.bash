@@ -61,9 +61,21 @@ download_release() {
   filename="$2"
 
   url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_${architecture}.tar.gz"
+  alternative_url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_${architecture}_all.tar.gz"
+
+  success=1
 
   echo "* Downloading $TOOL_NAME release $version..."
-  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || $success=0
+
+  if [ $success -eq 0 ]; then
+    curl "${curl_opts[@]}" -o "$filename" -C - "$alternative_url" || $success=0
+  fi
+  
+  if [ $success -eq 0 ]; then
+    fail "Could not download $url"
+  fi
+
 }
 
 install_version() {
