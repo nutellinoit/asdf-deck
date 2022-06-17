@@ -61,7 +61,7 @@ download_release() {
   filename="$2"
 
   url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_${architecture}.tar.gz"
-  alternative_url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_${architecture}_all.tar.gz"
+  alternative_url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_all.tar.gz"
 
   success=1
 
