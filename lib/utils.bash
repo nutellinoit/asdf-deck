@@ -61,11 +61,11 @@ download_release() {
   filename="$2"
 
   url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_${architecture}.tar.gz"
-  alternative_url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_all.tar.gz"
 
-  success=1
-  # if platform is darwin
   if [ "$platform" = "darwin" ]; then
+    alternative_url="$GH_REPO/releases/download/v${version}/deck_${version}_${platform}_all.tar.gz"
+
+    success=1
     echo "* Downloading $TOOL_NAME release $version..."
     curl "${curl_opts[@]}" -o "$filename" -C - "$alternative_url" || success=0
 
@@ -79,7 +79,6 @@ download_release() {
   else
     curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
   fi
-
 
 }
 
