@@ -66,12 +66,12 @@ download_release() {
   success=1
 
   echo "* Downloading $TOOL_NAME release $version..."
-  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || $success=0
+  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || success=0
 
   if [ $success -eq 0 ]; then
-    curl "${curl_opts[@]}" -o "$filename" -C - "$alternative_url" || $success=0
+    curl "${curl_opts[@]}" -o "$filename" -C - "$alternative_url" || success=0
   fi
-  
+
   if [ $success -eq 0 ]; then
     fail "Could not download $url"
   fi
